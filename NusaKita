@@ -1,0 +1,2664 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NusaKita - Platform Belajar Budaya Nusantara</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-purple: #6A0DAD;
+            --secondary-purple: #8A2BE2;
+            --accent-teal: #00CED1;
+            --accent-orange: #FF7F50;
+            --accent-yellow: #FFD700;
+            --light-bg: #F8F7FF;
+            --dark-text: #2C2C54;
+            --card-bg: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #e6e6fa 100%);
+            color: var(--dark-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .nusa-header {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(106, 13, 173, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            font-size: 2.2rem;
+            color: var(--accent-yellow);
+            filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+        }
+
+        .nav-main {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-item:hover::before {
+            left: 100%;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .user-quickstats {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .stat-badge {
+            background: rgba(255,255,255,0.15);
+            padding: 0.7rem 1.2rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .stat-badge:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Page Sections */
+        .page-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hero Section */
+        .cultural-hero {
+            background: linear-gradient(135deg, rgba(106, 13, 173, 0.85), rgba(138, 43, 226, 0.9)), url('https://images.unsplash.com/photo-1520583457224-aee11bad5112?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cultural-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100px, -100px); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            animation: slideUp 0.8s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideUp 1s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Learning Hub */
+        .learning-hub {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-purple);
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-purple), var(--accent-teal));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .hub-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(106, 13, 173, 0.1);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .hub-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-purple), var(--accent-teal), var(--accent-orange));
+        }
+
+        .hub-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(106, 13, 173, 0.2);
+            border-color: var(--accent-teal);
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .card-title {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--primary-purple);
+        }
+
+        .card-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .card-features li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .card-features li:hover {
+            transform: translateX(5px);
+        }
+
+        .card-features li::before {
+            content: '▸';
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3);
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 13, 173, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-purple);
+            color: var(--primary-purple);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-purple);
+            color: white;
+        }
+
+        /* Modal Systems */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: scaleIn 0.3s ease;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        /* Lesson Content */
+        .lesson-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .lesson-image {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .lesson-text {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-container {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--accent-teal);
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-purple);
+            font-weight: bold;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--accent-teal);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary-purple);
+            background: #f0e6ff;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 3000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease-in-out;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast i {
+            font-size: 1.2rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin: 2rem 0;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-purple), var(--accent-teal));
+            border-radius: 5px;
+            transition: width 0.5s ease;
+            width: 0%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.1);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary-purple);
+        }
+
+        /* Game Styles */
+        .game-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .game-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid var(--light-bg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .game-card:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-teal);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Region Grid */
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .region-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .region-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-purple), var(--accent-teal));
+        }
+
+        .region-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-teal);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .region-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .nusa-footer {
+            background: linear-gradient(135deg, var(--primary-purple), var(--secondary-purple));
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nusa-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-yellow);
+            transition: width 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--accent-yellow);
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-purple), var(--accent-teal));
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: floatAround 20s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            width: 60px;
+            height: 60px;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 70%;
+            left: 80%;
+            animation-delay: -5s;
+            width: 40px;
+            height: 40px;
+        }
+
+        .floating-element:nth-child(3) {
+            top: 40%;
+            left: 85%;
+            animation-delay: -10s;
+            width: 70px;
+            height: 70px;
+        }
+
+        .floating-element:nth-child(4) {
+            top: 80%;
+            left: 20%;
+            animation-delay: -15s;
+            width: 30px;
+            height: 30px;
+        }
+
+        @keyframes floatAround {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(100px, 100px) rotate(90deg);
+            }
+            50% {
+                transform: translate(0, 200px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-100px, 100px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-main {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .hub-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .user-quickstats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .game-board {
+                grid-template-columns: 1fr;
+            }
+
+            .region-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements -->
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Main Modal -->
+    <div class="modal" id="mainModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Belajar Budaya Nusantara</h2>
+                <button class="close-modal" id="closeModal">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="nusa-header">
+        <div class="header-container">
+            <div class="logo" id="logo">
+                <i class="fas fa-globe-asia logo-icon"></i>
+                <span>NusaKita</span>
+            </div>
+            
+            <nav class="nav-main">
+                <div class="nav-item active" data-page="home">
+                    <i class="fas fa-home"></i> Beranda
+                </div>
+                <div class="nav-item" data-page="learn">
+                    <i class="fas fa-graduation-cap"></i> Belajar
+                </div>
+                <div class="nav-item" data-page="explore">
+                    <i class="fas fa-map-marked-alt"></i> Eksplorasi
+                </div>
+                <div class="nav-item" data-page="progress">
+                    <i class="fas fa-chart-line"></i> Progress
+                </div>
+            </nav>
+
+            <div class="user-quickstats">
+                <div class="stat-badge" id="userLevel">
+                    <i class="fas fa-star" style="color: var(--accent-yellow);"></i>
+                    <span>Pemula</span>
+                </div>
+                <div class="stat-badge" id="loginBtn">
+                    <i class="fas fa-user" style="color: var(--accent-teal);"></i>
+                    <span>Masuk</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page-section active">
+        <!-- Hero Section -->
+        <section class="cultural-hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Jelajahi Keindahan Budaya Nusantara</h1>
+                <p class="hero-subtitle">Temukan kekayaan budaya Indonesia melalui pengalaman belajar yang interaktif dan menyenangkan</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                    <button class="action-btn" id="startLearning">
+                        <i class="fas fa-play"></i> Mulai Petualangan
+                    </button>
+                    <button class="action-btn btn-outline" id="quickTour">
+                        <i class="fas fa-compass"></i> Tur Cepat
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Hub -->
+        <section class="learning-hub">
+            <h2 class="section-title">Pilih Perjalanan Belajar Anda</h2>
+            <p class="section-subtitle">Temukan cara belajar yang paling sesuai dengan gaya Anda</p>
+            
+            <div class="hub-grid">
+                <!-- Kelas Interaktif -->
+                <div class="hub-card" id="interactiveClass">
+                    <div class="card-icon">🎮</div>
+                    <h3 class="card-title">Kelas Interaktif</h3>
+                    <p>Belajar dengan video, kuis, dan aktivitas interaktif yang menyenangkan</p>
+                    <ul class="card-features">
+                        <li>Video pembelajaran menarik</li>
+                        <li>Kuis dan tantangan</li>
+                        <li>Progress tracking</li>
+                        <li>Sertifikat penyelesaian</li>
+                    </ul>
+                    <button class="action-btn hub-card-btn" data-type="interactiveClass" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-play-circle"></i> Mulai Kelas
+                    </button>
+                </div>
+
+                <!-- Eksplorasi Budaya -->
+                <div class="hub-card" id="culturalExploration">
+                    <div class="card-icon">🌏</div>
+                    <h3 class="card-title">Eksplorasi Budaya</h3>
+                    <p>Jelajahi berbagai daerah dan tradisi budaya Indonesia secara virtual</p>
+                    <ul class="card-features">
+                        <li>Peta budaya interaktif</li>
+                        <li>Virtual museum tours</li>
+                        <li>Galeri foto dan video</li>
+                        <li>Cerita tradisi lokal</li>
+                    </ul>
+                    <button class="action-btn btn-outline hub-card-btn" data-type="culturalExploration" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-binoculars"></i> Mulai Jelajah
+                    </button>
+                </div>
+
+                <!-- Permainan Edukasi -->
+                <div class="hub-card" id="educationalGames">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Permainan Edukasi</h3>
+                    <p>Belajar sambil bermain dengan game-game budaya yang seru</p>
+                    <ul class="card-features">
+                        <li>Tebak motif batik</li>
+                        <li>Pasangkan alat musik</li>
+                        <li>Kuis cepat</li>
+                        <li>Simulasi tradisi</li>
+                    </ul>
+                    <button class="action-btn hub-card-btn" data-type="educationalGames" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-gamepad"></i> Main Sekarang
+                    </button>
+                </div>
+
+                <!-- Komunitas Belajar -->
+                <div class="hub-card" id="learningCommunity">
+                    <div class="card-icon">👥</div>
+                    <h3 class="card-title">Komunitas Belajar</h3>
+                    <p>Bergabung dengan komunitas pencinta budaya dan belajar bersama</p>
+                    <ul class="card-features">
+                        <li>Diskusi kelompok</li>
+                        <li>Berbagi pengetahuan</li>
+                        <li>Event budaya</li>
+                        <li>Proyek kolaborasi</li>
+                    </ul>
+                    <button class="action-btn btn-outline hub-card-btn" data-type="learningCommunity" style="width: 100%; justify-content: center;">
+                        <i class="fas fa-users"></i> Gabung Komunitas
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Access Section -->
+        <section class="learning-hub" style="background: var(--light-bg); padding: 3rem 2rem; border-radius: 20px; margin: 3rem auto;">
+            <h2 class="section-title">Akses Cepat Materi Populer</h2>
+            <p class="section-subtitle">Mulai dengan materi budaya yang paling dicari</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                <div class="hub-card" style="padding: 1.5rem; text-align: center;" data-topic="batik">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎨</div>
+                    <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">Seni Batik</h4>
+                    <p style="color: #666; font-size: 0.9rem;">Pelajari motif dan filosofi batik tradisional</p>
+                    <button class="action-btn quick-access-btn" data-topic="batik" style="margin-top: 1rem; padding: 0.5rem 1rem;">
+                        Pelajari
+                    </button>
+                </div>
+
+                <div class="hub-card" style="padding: 1.5rem; text-align: center;" data-topic="wayang">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎭</div>
+                    <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">Wayang Kulit</h4>
+                    <p style="color: #666; font-size: 0.9rem;">Mengenal seni pertunjukan wayang tradisional</p>
+                    <button class="action-btn quick-access-btn" data-topic="wayang" style="margin-top: 1rem; padding: 0.5rem 1rem;">
+                        Pelajari
+                    </button>
+                </div>
+
+                <div class="hub-card" style="padding: 1.5rem; text-align: center;" data-topic="tarian">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">💃</div>
+                    <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">Tarian Tradisional</h4>
+                    <p style="color: #666; font-size: 0.9rem;">Kenali tarian dari berbagai daerah Indonesia</p>
+                    <button class="action-btn quick-access-btn" data-topic="tarian" style="margin-top: 1rem; padding: 0.5rem 1rem;">
+                        Pelajari
+                    </button>
+                </div>
+
+                <div class="hub-card" style="padding: 1.5rem; text-align: center;" data-topic="kuliner">
+                    <div style="font-size: 2.5rem; margin-bottom: 1rem;">🍛</div>
+                    <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">Kuliner Nusantara</h4>
+                    <p style="color: #666; font-size: 0.9rem;">Eksplorasi makanan tradisional Indonesia</p>
+                    <button class="action-btn quick-access-btn" data-topic="kuliner" style="margin-top: 1rem; padding: 0.5rem 1rem;">
+                        Pelajari
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Learn Page -->
+    <div id="learn-page" class="page-section">
+        <section class="cultural-hero" style="background: linear-gradient(rgba(106, 13, 173, 0.9), rgba(138, 43, 226, 0.9));">
+            <div class="hero-content">
+                <h1 class="hero-title">Pusat Pembelajaran</h1>
+                <p class="hero-subtitle">Tingkatkan pengetahuan budaya Anda dengan materi interaktif</p>
+            </div>
+        </section>
+
+        <section class="learning-hub">
+            <h2 class="section-title">Pilih Topik Belajar</h2>
+            <p class="section-subtitle">Jelajahi berbagai topik budaya Indonesia yang menarik</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div class="hub-card" style="text-align: center; cursor: pointer;" onclick="startTopic('batik')">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🎨</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Seni Batik</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">Pelajari motif dan filosofi batik tradisional dari berbagai daerah</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 30%"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Progress</span>
+                            <span>30%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hub-card" style="text-align: center; cursor: pointer;" onclick="startTopic('wayang')">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🎭</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Wayang Kulit</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">Mengenal seni pertunjukan wayang dan filosofinya</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 10%"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Progress</span>
+                            <span>10%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hub-card" style="text-align: center; cursor: pointer;" onclick="startTopic('tarian')">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">💃</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Tarian Tradisional</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">Eksplorasi tarian dari berbagai suku di Indonesia</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Progress</span>
+                            <span>0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hub-card" style="text-align: center; cursor: pointer;" onclick="startTopic('kuliner')">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🍛</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Kuliner Nusantara</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">Kenali makanan tradisional dari berbagai daerah</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Progress</span>
+                            <span>0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hub-card" style="text-align: center; cursor: pointer;" onclick="startTopic('rumah-adat')">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🏠</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Rumah Adat</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">Arsitektur tradisional Indonesia</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Progress</span>
+                            <span>0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hub-card" style="text-align: center; cursor: pointer;" onclick="startTopic('alat-musik')">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">🎵</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Alat Musik Tradisional</h3>
+                    <p style="color: #666; margin-bottom: 1.5rem;">Alat musik khas dari berbagai daerah</p>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Progress</span>
+                            <span>0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Explore Page -->
+    <div id="explore-page" class="page-section">
+        <section class="cultural-hero" style="background: linear-gradient(rgba(0, 206, 209, 0.9), rgba(106, 13, 173, 0.9));">
+            <div class="hero-content">
+                <h1 class="hero-title">Eksplorasi Budaya</h1>
+                <p class="hero-subtitle">Jelajahi kekayaan budaya Indonesia dari berbagai daerah</p>
+            </div>
+        </section>
+
+        <section class="learning-hub">
+            <h2 class="section-title">Pilih Daerah yang Ingin Dijelajahi</h2>
+            <p class="section-subtitle">Temukan keunikan budaya dari setiap provinsi di Indonesia</p>
+            
+            <div class="region-grid" id="region-grid">
+                <!-- Regions will be populated by JavaScript -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Progress Page -->
+    <div id="progress-page" class="page-section">
+        <section class="cultural-hero" style="background: linear-gradient(rgba(255, 215, 0, 0.9), rgba(106, 13, 173, 0.9));">
+            <div class="hero-content">
+                <h1 class="hero-title">Progress Belajar</h1>
+                <p class="hero-subtitle">Lihat perkembangan dan pencapaian belajar Anda</p>
+            </div>
+        </section>
+
+        <section class="learning-hub">
+            <div id="progress-content"></div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="nusa-footer">
+        <div class="footer-content">
+            <div class="logo" style="justify-content: center; margin-bottom: 1rem;">
+                <i class="fas fa-globe-asia logo-icon"></i>
+                <span>NusaKita</span>
+            </div>
+            <p>Platform Belajar Budaya Nusantara yang Interaktif dan Menyenangkan</p>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Tentang Kami</a>
+                <a href="#" class="footer-link">Kebijakan Privasi</a>
+                <a href="#" class="footer-link">Syarat & Ketentuan</a>
+                <a href="#" class="footer-link">Kontak</a>
+            </div>
+            <p style="margin-top: 1.5rem; opacity: 0.8; font-size: 0.9rem;">
+                &copy; 2025 NusaKita. Semua hak dilindungi.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // NusaKita Production Ready Platform
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePlatform();
+        });
+
+        // User Data & Progress
+        const userData = {
+            name: "Pengguna NusaKita",
+            level: "Pemula",
+            progress: {
+                completedLessons: 0,
+                totalLessons: 50,
+                currentStreak: 0,
+                totalXP: 0
+            },
+            currentTopic: null
+        };
+
+        // All Provinces in Indonesia
+        const allRegions = [
+            { id: 'aceh', name: 'Aceh', icon: '🕌', color: '#6A0DAD', capital: 'Banda Aceh' },
+            { id: 'sumatera-utara', name: 'Sumatera Utara', icon: '🌋', color: '#8A2BE2', capital: 'Medan' },
+            { id: 'sumatera-barat', name: 'Sumatera Barat', icon: '🏔️', color: '#00CED1', capital: 'Padang' },
+            { id: 'riau', name: 'Riau', icon: '🌴', color: '#FF7F50', capital: 'Pekanbaru' },
+            { id: 'jambi', name: 'Jambi', icon: '🐘', color: '#FFD700', capital: 'Jambi' },
+            { id: 'sumatera-selatan', name: 'Sumatera Selatan', icon: '🌉', color: '#9370DB', capital: 'Palembang' },
+            { id: 'bengkulu', name: 'Bengkulu', icon: '🌺', color: '#20B2AA', capital: 'Bengkulu' },
+            { id: 'lampung', name: 'Lampung', icon: '🐅', color: '#DA70D6', capital: 'Bandar Lampung' },
+            { id: 'kepulauan-bangka-belitung', name: 'Bangka Belitung', icon: '🏝️', color: '#FF69B4', capital: 'Pangkal Pinang' },
+            { id: 'kepulauan-riau', name: 'Kepulauan Riau', icon: '⛵', color: '#1E90FF', capital: 'Tanjung Pinang' },
+            { id: 'dki-jakarta', name: 'DKI Jakarta', icon: '🏙️', color: '#4169E1', capital: 'Jakarta' },
+            { id: 'jawa-barat', name: 'Jawa Barat', icon: '🌄', color: '#8B0000', capital: 'Bandung' },
+            { id: 'jawa-tengah', name: 'Jawa Tengah', icon: '🛕', color: '#2E8B57', capital: 'Semarang' },
+            { id: 'di-yogyakarta', name: 'DI Yogyakarta', icon: '🏯', color: '#FF8C00', capital: 'Yogyakarta' },
+            { id: 'jawa-timur', name: 'Jawa Timur', icon: '🌅', color: '#8B008B', capital: 'Surabaya' },
+            { id: 'banten', name: 'Banten', icon: '🦅', color: '#483D8B', capital: 'Serang' },
+            { id: 'bali', name: 'Bali', icon: '🛕', color: '#FF4500', capital: 'Denpasar' },
+            { id: 'nusa-tenggara-barat', name: 'NTB', icon: '🐚', color: '#20B2AA', capital: 'Mataram' },
+            { id: 'nusa-tenggara-timur', name: 'NTT', icon: '🦎', color: '#DA70D6', capital: 'Kupang' },
+            { id: 'kalimantan-barat', name: 'Kalimantan Barat', icon: '🌳', color: '#8FBC8F', capital: 'Pontianak' },
+            { id: 'kalimantan-tengah', name: 'Kalimantan Tengah', icon: '🌲', color: '#BDB76B', capital: 'Palangkaraya' },
+            { id: 'kalimantan-selatan', name: 'Kalimantan Selatan', icon: '💎', color: '#FFD700', capital: 'Banjarmasin' },
+            { id: 'kalimantan-timur', name: 'Kalimantan Timur', icon: '🛢️', color: '#8B4513', capital: 'Samarinda' },
+            { id: 'kalimantan-utara', name: 'Kalimantan Utara', icon: '🌿', color: '#2F4F4F', capital: 'Tanjung Selor' },
+            { id: 'sulawesi-utara', name: 'Sulawesi Utara', icon: '🌊', color: '#4682B4', capital: 'Manado' },
+            { id: 'sulawesi-tengah', name: 'Sulawesi Tengah', icon: '🏞️', color: '#D2691E', capital: 'Palu' },
+            { id: 'sulawesi-selatan', name: 'Sulawesi Selatan', icon: '⛵', color: '#DC143C', capital: 'Makassar' },
+            { id: 'sulawesi-tenggara', name: 'Sulawesi Tenggara', icon: '🐚', color: '#32CD32', capital: 'Kendari' },
+            { id: 'gorontalo', name: 'Gorontalo', icon: '🎭', color: '#FF69B4', capital: 'Gorontalo' },
+            { id: 'sulawesi-barat', name: 'Sulawesi Barat', icon: '🌋', color: '#8A2BE2', capital: 'Mamuju' },
+            { id: 'maluku', name: 'Maluku', icon: '🌺', color: '#FF6347', capital: 'Ambon' },
+            { id: 'maluku-utara', name: 'Maluku Utara', icon: '🔥', color: '#00CED1', capital: 'Sofifi' },
+            { id: 'papua-barat', name: 'Papua Barat', icon: '🦜', color: '#228B22', capital: 'Manokwari' },
+            { id: 'papua', name: 'Papua', icon: '🏔️', color: '#1E90FF', capital: 'Jayapura' }
+        ];
+
+        // Extended Learning Content Database
+        const learningContent = {
+            'batik': {
+                title: 'Seni Batik Indonesia',
+                description: 'Pelajari keindahan dan filosofi batik tradisional Indonesia',
+                lessons: [
+                    {
+                        id: 1,
+                        title: 'Sejarah dan Pengenalan Batik',
+                        content: `
+                            <div class="lesson-content">
+                                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Sejarah Batik Indonesia</h3>
+                                <p class="lesson-text">
+                                    Batik adalah warisan budaya Indonesia yang telah diakui UNESCO sebagai Warisan Kemanusiaan untuk Budaya Lisan dan Nonbendawi sejak 2009. 
+                                    Kata "batik" berasal dari bahasa Jawa "amba" (menulis) dan "titik".
+                                </p>
+                                
+                                <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 15px; margin: 1.5rem 0;">
+                                    <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">🎯 Fakta Menarik Batik:</h4>
+                                    <ul style="padding-left: 1.5rem;">
+                                        <li>Setiap motif batik memiliki makna filosofis yang dalam</li>
+                                        <li>Teknik membatik tradisional menggunakan canting dan malam (lilin)</li>
+                                        <li>Warna batik tradisional berasal dari bahan alam seperti tingi, soga, dan nila</li>
+                                        <li>Batik telah ada sejak zaman Majapahit dan menyebar ke seluruh Nusantara</li>
+                                    </ul>
+                                </div>
+
+                                <div class="quiz-container">
+                                    <div class="quiz-question">Kapan UNESCO mengakui batik sebagai Warisan Kemanusiaan?</div>
+                                    <div class="quiz-options">
+                                        <div class="quiz-option" data-correct="true">Tahun 2009</div>
+                                        <div class="quiz-option">Tahun 2005</div>
+                                        <div class="quiz-option">Tahun 2012</div>
+                                        <div class="quiz-option">Tahun 1998</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 2,
+                        title: 'Motif Batik Tradisional dan Maknanya',
+                        content: `
+                            <div class="lesson-content">
+                                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Ragam Motif Batik Nusantara</h3>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+                                    <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                        <div style="font-size: 3rem;">🌀</div>
+                                        <h4>Batik Parang</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Melambangkan kesinambungan dan tidak putusnya semangat belajar</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                        <div style="font-size: 3rem;">🔶</div>
+                                        <h4>Batik Kawung</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Simbol kesempurnaan dan kemurnian hati</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                        <div style="font-size: 3rem;">☁️</div>
+                                        <h4>Batik Megamendung</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Menggambarkan awan pembawa hujan kesuburan</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                        <div style="font-size: 3rem;">🌺</div>
+                                        <h4>Batik Truntum</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Cinta yang tumbuh dan berkembang</p>
+                                    </div>
+                                </div>
+
+                                <div class="quiz-container">
+                                    <div class="quiz-question">Motif batik mana yang melambangkan kesinambungan dan tidak putus-putusnya semangat belajar?</div>
+                                    <div class="quiz-options">
+                                        <div class="quiz-option" data-correct="true">Batik Parang</div>
+                                        <div class="quiz-option">Batik Kawung</div>
+                                        <div class="quiz-option">Batik Megamendung</div>
+                                        <div class="quiz-option">Batik Truntum</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 3,
+                        title: 'Batik dari Berbagai Daerah',
+                        content: `
+                            <div class="lesson-content">
+                                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Kekhasan Batik Daerah</h3>
+                                <p class="lesson-text">
+                                    Setiap daerah di Indonesia memiliki ciri khas batiknya sendiri, baik dari segi motif, warna, maupun teknik pembuatannya.
+                                </p>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+                                    <div style="text-align: center; padding: 1rem; background: #e8f4f8; border-radius: 10px;">
+                                        <h4>Batik Jawa</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Motif klasik dengan warna soga dan biru tua</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1rem; background: #f0e8ff; border-radius: 10px;">
+                                        <h4>Batik Bali</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Warna cerah dengan motif flora dan fauna</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1rem; background: #fff0e8; border-radius: 10px;">
+                                        <h4>Batik Sumatra</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Motif bold dengan warna-warna berani</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1rem; background: #e8ffe8; border-radius: 10px;">
+                                        <h4>Batik Kalimantan</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Motif inspirasi alam dan budaya Dayak</p>
+                                    </div>
+                                </div>
+
+                                <div class="quiz-container">
+                                    <div class="quiz-question">Batik dari daerah mana yang terkenal dengan warna soga dan biru tua?</div>
+                                    <div class="quiz-options">
+                                        <div class="quiz-option" data-correct="true">Batik Jawa</div>
+                                        <div class="quiz-option">Batik Bali</div>
+                                        <div class="quiz-option">Batik Sumatra</div>
+                                        <div class="quiz-option">Batik Kalimantan</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            'wayang': {
+                title: 'Seni Wayang Kulit',
+                description: 'Mengenal seni pertunjukan wayang tradisional Jawa',
+                lessons: [
+                    {
+                        id: 1,
+                        title: 'Pengenalan Wayang Kulit',
+                        content: `
+                            <div class="lesson-content">
+                                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Wayang Kulit Tradisional</h3>
+                                <p class="lesson-text">
+                                    Wayang Kulit adalah seni pertunjukan tradisional Jawa yang menggunakan boneka kulit yang dimainkan oleh dalang. 
+                                    Pertunjukan wayang biasanya menceritakan epik Mahabharata dan Ramayana.
+                                </p>
+                                
+                                <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 15px; margin: 1.5rem 0;">
+                                    <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">🎭 Unsur Penting Wayang:</h4>
+                                    <ul style="padding-left: 1.5rem;">
+                                        <li><strong>Dalang</strong>: Pemimpin pertunjukan yang memainkan wayang</li>
+                                        <li><strong>Gamelan</strong>: Musik pengiring tradisional</li>
+                                        <li><strong>Sinden</strong>: Penyanyi latar</li>
+                                        <li><strong>Kelir</strong>: Layar tempat mempertunjukkan wayang</li>
+                                    </ul>
+                                </div>
+
+                                <div class="quiz-container">
+                                    <div class="quiz-question">Siapa yang memimpin pertunjukan wayang kulit?</div>
+                                    <div class="quiz-options">
+                                        <div class="quiz-option">Sinden</div>
+                                        <div class="quiz-option" data-correct="true">Dalang</div>
+                                        <div class="quiz-option">Pemain Gamelan</div>
+                                        <div class="quiz-option">Penonton</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    },
+                    {
+                        id: 2,
+                        title: 'Karakter Wayang dan Filosofinya',
+                        content: `
+                            <div class="lesson-content">
+                                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Tokoh-tokoh Wayang</h3>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+                                    <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                        <div style="font-size: 2rem;">🃏</div>
+                                        <h4>Punakawan</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Semar, Gareng, Petruk, Bagong - Penasihat bijak</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                        <div style="font-size: 2rem;">⚔️</div>
+                                        <h4>Ksatriya</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Arjuna, Bima, Yudhistira - Ksatria utama</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                        <div style="font-size: 2rem;">👹</div>
+                                        <h4>Raksasa</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Duryodana, Sengkuni - Tokoh antagonis</p>
+                                    </div>
+                                    <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                        <div style="font-size: 2rem;">👸</div>
+                                        <h4>Dewi</h4>
+                                        <p style="font-size: 0.9rem; color: #666;">Srikandi, Dewi Kunti - Tokoh perempuan</p>
+                                    </div>
+                                </div>
+
+                                <div class="quiz-container">
+                                    <div class="quiz-question">Kelompok wayang mana yang berperan sebagai penasihat bijak dengan unsur humor?</div>
+                                    <div class="quiz-options">
+                                        <div class="quiz-option">Ksatriya</div>
+                                        <div class="quiz-option" data-correct="true">Punakawan</div>
+                                        <div class="quiz-option">Raksasa</div>
+                                        <div class="quiz-option">Dewi</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            'tarian': {
+                title: 'Tarian Tradisional Indonesia',
+                description: 'Mengenal keindahan tarian dari berbagai daerah di Indonesia',
+                lessons: [
+                    {
+                        id: 1,
+                        title: 'Tarian Klasik dari Jawa dan Bali',
+                        content: `
+                            <div class="lesson-content">
+                                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Tarian Klasik Nusantara</h3>
+                                <p class="lesson-text">
+                                    Indonesia memiliki kekayaan tarian tradisional yang sangat beragam, masing-masing dengan ciri khas dan makna filosofis yang mendalam.
+                                </p>
+                                
+                                <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 15px; margin: 1.5rem 0;">
+                                    <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">💃 Tarian Terkenal:</h4>
+                                    <ul style="padding-left: 1.5rem;">
+                                        <li><strong>Tari Saman</strong> (Aceh) - Tari dengan gerakan tangan yang cepat dan kompak</li>
+                                        <li><strong>Tari Kecak</strong> (Bali) - Tari drama dengan puluhan penari laki-laki</li>
+                                        <li><strong>Tari Pendet</strong> (Bali) - Tari penyambutan dan persembahan</li>
+                                        <li><strong>Tari Jaipong</strong> (Jawa Barat) - Tari pergaulan yang energik</li>
+                                        <li><strong>Tari Piring</strong> (Sumatera Barat) - Tari dengan piring sebagai properti</li>
+                                    </ul>
+                                </div>
+
+                                <div class="quiz-container">
+                                    <div class="quiz-question">Tari mana yang berasal dari Aceh dan terkenal dengan gerakan tangan yang cepat?</div>
+                                    <div class="quiz-options">
+                                        <div class="quiz-option" data-correct="true">Tari Saman</div>
+                                        <div class="quiz-option">Tari Kecak</div>
+                                        <div class="quiz-option">Tari Pendet</div>
+                                        <div class="quiz-option">Tari Jaipong</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            'kuliner': {
+                title: 'Kuliner Nusantara',
+                description: 'Jelajahi kekayaan kuliner tradisional Indonesia',
+                lessons: [
+                    {
+                        id: 1,
+                        title: 'Makanan Tradisional Indonesia',
+                        content: `
+                            <div class="lesson-content">
+                                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Kekayaan Kuliner Indonesia</h3>
+                                <p class="lesson-text">
+                                    Setiap daerah di Indonesia memiliki makanan khas yang mencerminkan budaya dan kekayaan alam setempat.
+                                </p>
+                                
+                                <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 15px; margin: 1.5rem 0;">
+                                    <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">🍛 Makanan Khas Daerah:</h4>
+                                    <ul style="padding-left: 1.5rem;">
+                                        <li><strong>Rendang</strong> (Padang) - Daging dimasak dengan santan dan rempah</li>
+                                        <li><strong>Gudeg</strong> (Yogyakarta) - Nangka muda dimasak dengan santan</li>
+                                        <li><strong>Pempek</strong> (Palembang) - Olahan ikan dengan kuah cuko</li>
+                                        <li><strong>Ayam Betutu</strong> (Bali) - Ayam yang dibumbui dan dibungkus daun</li>
+                                        <li><strong>Soto Banjar</strong> (Kalimantan) - Soto dengan aroma rempah yang khas</li>
+                                    </ul>
+                                </div>
+
+                                <div class="quiz-container">
+                                    <div class="quiz-question">Makanan khas Padang yang terkenal dengan rasa rempahnya yang kuat adalah?</div>
+                                    <div class="quiz-options">
+                                        <div class="quiz-option" data-correct="true">Rendang</div>
+                                        <div class="quiz-option">Gudeg</div>
+                                        <div class="quiz-option">Pempek</div>
+                                        <div class="quiz-option">Ayam Betutu</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            'rumah-adat': {
+                title: 'Rumah Adat Indonesia',
+                description: 'Mengenal arsitektur tradisional rumah adat Nusantara',
+                lessons: [
+                    {
+                        id: 1,
+                        title: 'Arsitektur Tradisional Nusantara',
+                        content: `
+                            <div class="lesson-content">
+                                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Rumah Adat Indonesia</h3>
+                                <p class="lesson-text">
+                                    Rumah adat di Indonesia mencerminkan kearifan lokal, adaptasi dengan lingkungan, dan nilai-nilai budaya masyarakat setempat.
+                                </p>
+                                
+                                <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 15px; margin: 1.5rem 0;">
+                                    <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">🏠 Jenis Rumah Adat:</h4>
+                                    <ul style="padding-left: 1.5rem;">
+                                        <li><strong>Rumah Gadang</strong> (Minangkabau) - Atap bergonjong seperti tanduk kerbau</li>
+                                        <li><strong>Joglo</strong> (Jawa) - Atap limas dengan tiang utama di tengah</li>
+                                        <li><strong>Honai</strong> (Papua) - Rumah bulat dengan atap jerami</li>
+                                        <li><strong>Rumah Panjang</strong> (Kalimantan) - Rumah panjang untuk beberapa keluarga</li>
+                                        <li><strong>Tongkonan</strong> (Toraja) - Atap melengkung seperti perahu</li>
+                                    </ul>
+                                </div>
+
+                                <div class="quiz-container">
+                                    <div class="quiz-question">Rumah adat mana yang memiliki atap bergonjong seperti tanduk kerbau?</div>
+                                    <div class="quiz-options">
+                                        <div class="quiz-option" data-correct="true">Rumah Gadang</div>
+                                        <div class="quiz-option">Joglo</div>
+                                        <div class="quiz-option">Honai</div>
+                                        <div class="quiz-option">Tongkonan</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    }
+                ]
+            },
+            'alat-musik': {
+                title: 'Alat Musik Tradisional',
+                description: 'Mengenal alat musik khas dari berbagai daerah Indonesia',
+                lessons: [
+                    {
+                        id: 1,
+                        title: 'Alat Musik Nusantara',
+                        content: `
+                            <div class="lesson-content">
+                                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Kekayaan Alat Musik Tradisional</h3>
+                                <p class="lesson-text">
+                                    Indonesia memiliki beragam alat musik tradisional yang unik dan memiliki suara khas.
+                                </p>
+                                
+                                <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 15px; margin: 1.5rem 0;">
+                                    <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">🎵 Alat Musik Daerah:</h4>
+                                    <ul style="padding-left: 1.5rem;">
+                                        <li><strong>Gamelan</strong> (Jawa/Bali) - Ensemble musik dengan gong, kenong, saron</li>
+                                        <li><strong>Angklung</strong> (Jawa Barat) - Alat musik bambu yang digoyangkan</li>
+                                        <li><strong>Sasando</strong> (NTT) - Alat musik petik dari daun lontar</li>
+                                        <li><strong>Kolintang</strong> (Sulawesi Utara) - Alat musik pukul dari kayu</li>
+                                        <li><strong>Tifa</strong> (Papua/Maluku) - Gendang panjang dari kayu</li>
+                                    </ul>
+                                </div>
+
+                                <div class="quiz-container">
+                                    <div class="quiz-question">Alat musik petik yang terbuat dari daun lontar berasal dari daerah mana?</div>
+                                    <div class="quiz-options">
+                                        <div class="quiz-option">Jawa Barat</div>
+                                        <div class="quiz-option">Sulawesi Utara</div>
+                                        <div class="quiz-option" data-correct="true">Nusa Tenggara Timur</div>
+                                        <div class="quiz-option">Papua</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    }
+                ]
+            }
+        };
+
+        // Region-specific content
+        const regionContent = {
+            'aceh': {
+                title: 'Budaya Aceh',
+                content: `
+                    <div class="lesson-content">
+                        <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Aceh - Serambi Mekkah</h3>
+                        <p class="lesson-text">
+                            Aceh dikenal sebagai Serambi Mekkah karena merupakan gerbang masuknya Islam ke Indonesia. 
+                            Daerah ini memiliki kekayaan budaya yang sangat kental dengan nilai-nilai Islam.
+                        </p>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+                            <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                <div style="font-size: 2rem;">💃</div>
+                                <h4>Tari Saman</h4>
+                                <p style="font-size: 0.9rem; color: #666;">Tari dengan gerakan tangan yang cepat dan kompak</p>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                <div style="font-size: 2rem;">🍛</div>
+                                <h4>Mie Aceh</h4>
+                                <p style="font-size: 0.9rem; color: #666;">Mie pedas dengan bumbu rempah khas</p>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                <div style="font-size: 2rem;">🏛️</div>
+                                <h4>Masjid Baiturrahman</h4>
+                                <p style="font-size: 0.9rem; color: #666;">Masjid bersejarah di jantung Banda Aceh</p>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                <div style="font-size: 2rem;">🎵</div>
+                                <h4>Rapai</h4>
+                                <p style="font-size: 0.9rem; color: #666;">Alat musik tradisional sejenis rebana</p>
+                            </div>
+                        </div>
+
+                        <div class="quiz-container">
+                            <div class="quiz-question">Apa julukan untuk Provinsi Aceh?</div>
+                            <div class="quiz-options">
+                                <div class="quiz-option" data-correct="true">Serambi Mekkah</div>
+                                <div class="quiz-option">Kota Gudeg</div>
+                                <div class="quiz-option">Negeri Seribu Sungai</div>
+                                <div class="quiz-option">Pulau Lumbung Padi</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            'bali': {
+                title: 'Budaya Bali',
+                content: `
+                    <div class="lesson-content">
+                        <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Bali - Pulau Dewata</h3>
+                        <p class="lesson-text">
+                            Bali terkenal dengan keindahan alam, seni, dan budayanya yang masih sangat kental. 
+                            Mayoritas penduduk Bali menganut agama Hindu dengan tradisi yang unik.
+                        </p>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+                            <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                <div style="font-size: 2rem;">💃</div>
+                                <h4>Tari Kecak</h4>
+                                <p style="font-size: 0.9rem; color: #666;">Tari drama dengan puluhan penari laki-laki</p>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                <div style="font-size: 2rem;">🍛</div>
+                                <h4>Ayam Betutu</h4>
+                                <p style="font-size: 0.9rem; color: #666;">Ayam yang dibumbui dan dibungkus daun</p>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                <div style="font-size: 2rem;">🛕</div>
+                                <h4>Pura Besakih</h4>
+                                <p style="font-size: 0.9rem; color: #666;">Pura terbesar dan tersuci di Bali</p>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: #f0e6ff; border-radius: 10px;">
+                                <div style="font-size: 2rem;">🎵</div>
+                                <h4>Gamelan Bali</h4>
+                                <p style="font-size: 0.9rem; color: #666;">Musik tradisional dengan tempo cepat</p>
+                            </div>
+                        </div>
+
+                        <div class="quiz-container">
+                            <div class="quiz-question">Apa nama pura terbesar dan tersuci di Bali?</div>
+                            <div class="quiz-options">
+                                <div class="quiz-option">Pura Ulun Danu</div>
+                                <div class="quiz-option" data-correct="true">Pura Besakih</div>
+                                <div class="quiz-option">Pura Tanah Lot</div>
+                                <div class="quiz-option">Pura Uluwatu</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+            // Content for other regions can be added similarly
+        };
+
+        function initializePlatform() {
+            // Navigation dengan fungsi sebenarnya
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    const page = this.getAttribute('data-page');
+                    showPage(page);
+                });
+            });
+
+            // Logo click - kembali ke home
+            document.getElementById('logo').addEventListener('click', function() {
+                showPage('home');
+                showToast('Selamat datang di NusaKita! 🌟');
+            });
+
+            // Hero section buttons
+            document.getElementById('startLearning').addEventListener('click', function() {
+                showPage('learn');
+            });
+
+            document.getElementById('quickTour').addEventListener('click', function() {
+                showQuickTour();
+            });
+
+            // Hub cards buttons
+            document.querySelectorAll('.hub-card-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const type = this.getAttribute('data-type');
+                    handleHubCardButton(type);
+                });
+            });
+
+            // Hub cards main area
+            document.querySelectorAll('.hub-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const title = this.querySelector('.card-title').textContent;
+                    showToast(`Membuka: ${title}`);
+                    
+                    if (this.id === 'interactiveClass') {
+                        showPage('learn');
+                    } else if (this.id === 'culturalExploration') {
+                        showPage('explore');
+                    } else if (this.id === 'educationalGames') {
+                        showEducationalGames();
+                    } else if (this.id === 'learningCommunity') {
+                        showLearningCommunity();
+                    }
+                });
+            });
+
+            // Quick access topics buttons
+            document.querySelectorAll('.quick-access-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const topic = this.getAttribute('data-topic');
+                    startTopic(topic);
+                });
+            });
+
+            // Quick access cards
+            document.querySelectorAll('[data-topic]').forEach(topic => {
+                topic.addEventListener('click', function() {
+                    const topicName = this.getAttribute('data-topic');
+                    startTopic(topicName);
+                });
+            });
+
+            // User level badge
+            document.getElementById('userLevel').addEventListener('click', function() {
+                showPage('progress');
+            });
+
+            // Login button
+            document.getElementById('loginBtn').addEventListener('click', function() {
+                showLoginModal();
+            });
+
+            // Modal close
+            document.getElementById('closeModal').addEventListener('click', closeModal);
+            document.getElementById('mainModal').addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+
+            // Populate regions grid
+            populateRegionsGrid();
+
+            // Initialize user progress
+            updateUserProgress();
+        }
+
+        function populateRegionsGrid() {
+            const grid = document.getElementById('region-grid');
+            grid.innerHTML = '';
+            
+            allRegions.forEach(region => {
+                const regionCard = document.createElement('div');
+                regionCard.className = 'region-card';
+                regionCard.style.borderColor = region.color;
+                regionCard.innerHTML = `
+                    <div class="region-icon">${region.icon}</div>
+                    <h4 style="color: ${region.color};">${region.name}</h4>
+                    <p style="color: #666; font-size: 0.8rem; margin-top: 0.5rem;">${region.capital}</p>
+                `;
+                regionCard.addEventListener('click', () => exploreRegion(region.id));
+                grid.appendChild(regionCard);
+            });
+        }
+
+        function exploreRegion(regionId) {
+            const region = allRegions.find(r => r.id === regionId);
+            if (!region) return;
+
+            if (regionContent[regionId]) {
+                showModal(`Budaya ${region.name}`, regionContent[regionId].content);
+            } else {
+                showModal(`Budaya ${region.name}`, `
+                    <div style="text-align: center; padding: 2rem;">
+                        <div style="font-size: 4rem;">${region.icon}</div>
+                        <h3 style="color: ${region.color}; margin-bottom: 1rem;">${region.name}</h3>
+                        <p style="margin-bottom: 1.5rem;">Ibukota: ${region.capital}</p>
+                        <p>Konten budaya untuk ${region.name} sedang dalam pengembangan. Mari jelajahi provinsi lainnya!</p>
+                    </div>
+                `);
+            }
+        }
+
+        function showTopicSelection() {
+            showModal('Pilih Topik Belajar', `
+                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Topik Budaya Nusantara</h3>
+                <p style="margin-bottom: 1.5rem;">Pilih topik yang ingin Anda pelajari:</p>
+                
+                <div style="display: grid; gap: 1rem;">
+                    ${Object.entries(learningContent).map(([key, topic]) => `
+                        <div class="hub-card" style="padding: 1.5rem; cursor: pointer;" onclick="startTopic('${key}')">
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="font-size: 2rem;">${getTopicIcon(key)}</div>
+                                <div style="flex: 1;">
+                                    <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">${topic.title}</h4>
+                                    <p style="color: #666; font-size: 0.9rem;">${topic.description}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `);
+        }
+
+        function getTopicIcon(topic) {
+            const icons = {
+                'batik': '🎨',
+                'wayang': '🎭',
+                'tarian': '💃',
+                'kuliner': '🍛',
+                'rumah-adat': '🏠',
+                'alat-musik': '🎵'
+            };
+            return icons[topic] || '📚';
+        }
+
+        function startTopic(topic) {
+            if (learningContent[topic]) {
+                userData.currentTopic = topic;
+                startLesson(topic, 0);
+            } else {
+                showModal('Materi Sedang Dikembangkan', `
+                    <div style="text-align: center; padding: 2rem;">
+                        <div style="font-size: 4rem;">🚧</div>
+                        <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Materi Sedang Dikembangkan</h3>
+                        <p style="margin-bottom: 1.5rem;">Topik <strong>${topic}</strong> sedang dalam proses pengembangan. Silakan pilih topik lain yang tersedia.</p>
+                        <button class="action-btn" onclick="showTopicSelection()">
+                            <i class="fas fa-book"></i> Pilih Topik Lain
+                        </button>
+                    </div>
+                `);
+            }
+        }
+
+        function startLesson(topic, lessonIndex) {
+            const topicData = learningContent[topic];
+            const lesson = topicData.lessons[lessonIndex];
+            
+            if (!lesson) {
+                completeTopic(topic);
+                return;
+            }
+
+            showModal(`${topicData.title} - ${lesson.title}`, `
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${(lessonIndex / topicData.lessons.length) * 100}%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Progress</span>
+                        <span>${lessonIndex + 1}/${topicData.lessons.length}</span>
+                    </div>
+                </div>
+                
+                ${lesson.content}
+                
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    ${lessonIndex > 0 ? `
+                        <button class="action-btn btn-outline" onclick="startLesson('${topic}', ${lessonIndex - 1})" style="flex: 1;">
+                            <i class="fas fa-arrow-left"></i> Sebelumnya
+                        </button>
+                    ` : ''}
+                    
+                    <button class="action-btn" onclick="checkAnswerAndContinue('${topic}', ${lessonIndex})" style="flex: 2;">
+                        ${lessonIndex === topicData.lessons.length - 1 ? 'Selesaikan Topik' : 'Lanjutkan'}
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            `);
+
+            // Setup quiz options
+            setTimeout(() => {
+                document.querySelectorAll('.quiz-option').forEach(option => {
+                    option.addEventListener('click', function() {
+                        document.querySelectorAll('.quiz-option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        this.classList.add('selected');
+                    });
+                });
+            }, 100);
+        }
+
+        function checkAnswerAndContinue(topic, lessonIndex) {
+            const selectedOption = document.querySelector('.quiz-option.selected');
+            
+            if (!selectedOption) {
+                showToast('Silakan pilih jawaban terlebih dahulu!', 'error');
+                return;
+            }
+
+            const isCorrect = selectedOption.getAttribute('data-correct') === 'true';
+            
+            if (isCorrect) {
+                showToast('Jawaban benar! 🎉', 'success');
+                userData.progress.totalXP += 10;
+                userData.progress.completedLessons++;
+                updateUserProgress();
+                
+                setTimeout(() => {
+                    startLesson(topic, lessonIndex + 1);
+                }, 1500);
+            } else {
+                showToast('Jawaban salah, coba lagi!', 'error');
+                selectedOption.style.background = '#ffebee';
+                selectedOption.style.borderColor = '#f44336';
+                selectedOption.style.color = '#d32f2f';
+            }
+        }
+
+        function completeTopic(topic) {
+            showModal('Topik Selesai! 🎉', `
+                <div style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 4rem;">🏆</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Selamat!</h3>
+                    <p style="margin-bottom: 1.5rem;">Anda telah menyelesaikan topik <strong>${learningContent[topic].title}</strong></p>
+                    
+                    <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 15px; margin: 1.5rem 0;">
+                        <h4 style="color: var(--primary-purple); margin-bottom: 1rem;">Pencapaian Anda:</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: center;">
+                            <div>
+                                <div style="font-size: 1.5rem; color: var(--accent-yellow);">⭐</div>
+                                <div style="font-weight: bold;">${userData.progress.totalXP} XP</div>
+                                <div style="font-size: 0.8rem; color: #666;">Total XP</div>
+                            </div>
+                            <div>
+                                <div style="font-size: 1.5rem; color: var(--accent-teal);">📚</div>
+                                <div style="font-weight: bold;">${userData.progress.completedLessons}</div>
+                                <div style="font-size: 0.8rem; color: #666;">Pelajaran</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="action-btn" onclick="showPage('learn')" style="margin-top: 1rem;">
+                        <i class="fas fa-book"></i> Pelajari Topik Lain
+                    </button>
+                </div>
+            `);
+            
+            // Update level based on XP
+            if (userData.progress.totalXP >= 200) {
+                userData.level = "Ahli Budaya";
+            } else if (userData.progress.totalXP >= 100) {
+                userData.level = "Menengah";
+            } else if (userData.progress.totalXP >= 50) {
+                userData.level = "Pemula Tingkat Lanjut";
+            }
+            updateUserProgress();
+        }
+
+        function showPage(page) {
+            // Sembunyikan semua section
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Tampilkan section yang dipilih
+            const targetPage = document.getElementById(`${page}-page`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Jika halaman progress, update kontennya
+            if (page === 'progress') {
+                showUserProgressInPage();
+            }
+            
+            showToast(`Membuka: ${getPageTitle(page)}`);
+        }
+
+        function getPageTitle(page) {
+            const titles = {
+                'home': 'Beranda',
+                'learn': 'Pusat Pembelajaran',
+                'explore': 'Eksplorasi Budaya',
+                'progress': 'Progress Belajar'
+            };
+            return titles[page] || 'Halaman';
+        }
+
+        function showUserProgressInPage() {
+            const progressPercent = (userData.progress.completedLessons / userData.progress.totalLessons) * 100;
+            
+            const progressContent = `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 3rem;">📊</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 0.5rem;">${userData.name}</h3>
+                    <div style="background: var(--accent-yellow); color: white; padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; font-weight: bold;">
+                        Level: ${userData.level}
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${progressPercent}%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Progress Keseluruhan</span>
+                        <span>${Math.round(progressPercent)}%</span>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0;">
+                    <div style="text-align: center; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="font-size: 1.5rem; color: var(--accent-yellow);">⭐</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;">${userData.progress.totalXP}</div>
+                        <div style="font-size: 0.8rem; color: #666;">Total XP</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="font-size: 1.5rem; color: var(--accent-teal);">🔥</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;">${userData.progress.currentStreak}</div>
+                        <div style="font-size: 0.8rem; color: #666;">Hari Beruntun</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="font-size: 1.5rem; color: var(--accent-orange);">📚</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;">${userData.progress.completedLessons}</div>
+                        <div style="font-size: 0.8rem; color: #666;">Pelajaran</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="font-size: 1.5rem; color: var(--secondary-purple);">⏱️</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;">${userData.progress.completedLessons * 15}</div>
+                        <div style="font-size: 0.8rem; color: #666;">Menit Belajar</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button class="action-btn" onclick="showPage('learn')">
+                        <i class="fas fa-plus"></i> Lanjutkan Belajar
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('progress-content').innerHTML = progressContent;
+        }
+
+        function handleHubCardButton(type) {
+            switch(type) {
+                case 'interactiveClass':
+                    showPage('learn');
+                    break;
+                case 'culturalExploration':
+                    showPage('explore');
+                    break;
+                case 'educationalGames':
+                    showEducationalGames();
+                    break;
+                case 'learningCommunity':
+                    showLearningCommunity();
+                    break;
+            }
+        }
+
+        function showEducationalGames() {
+            showModal('Permainan Edukasi', `
+                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Belajar Sambil Bermain</h3>
+                <p style="margin-bottom: 1.5rem;">Pilih permainan edukasi budaya:</p>
+                
+                <div style="display: grid; gap: 1.5rem;">
+                    <div class="hub-card" style="padding: 1.5rem; cursor: pointer;" onclick="startGame('tebak-batik')">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 3rem;">🎨</div>
+                            <div style="flex: 1;">
+                                <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">Tebak Motif Batik</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Tebak nama motif batik dari gambarnya</p>
+                            </div>
+                            <div style="background: var(--accent-yellow); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem;">
+                                +10 XP
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hub-card" style="padding: 1.5rem; cursor: pointer;" onclick="startGame('alat-musik')">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 3rem;">🎵</div>
+                            <div style="flex: 1;">
+                                <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">Pasangkan Alat Musik</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Pasangkan alat musik dengan daerah asalnya</p>
+                            </div>
+                            <div style="background: var(--accent-teal); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem;">
+                                +15 XP
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hub-card" style="padding: 1.5rem; cursor: pointer;" onclick="startGame('tebak-tarian')">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div style="font-size: 3rem;">💃</div>
+                            <div style="flex: 1;">
+                                <h4 style="color: var(--primary-purple); margin-bottom: 0.5rem;">Tebak Tarian</h4>
+                                <p style="color: #666; font-size: 0.9rem;">Tebak nama tarian dari gerakannya</p>
+                            </div>
+                            <div style="background: var(--secondary-purple); color: white; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.8rem;">
+                                +12 XP
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+        }
+
+        function startGame(gameType) {
+            let gameContent = '';
+            let gameTitle = '';
+            
+            switch(gameType) {
+                case 'tebak-batik':
+                    gameTitle = 'Tebak Motif Batik';
+                    gameContent = `
+                        <div class="game-container">
+                            <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">${gameTitle}</h3>
+                            <p style="margin-bottom: 2rem;">Tebak nama motif batik berdasarkan gambar!</p>
+                            
+                            <div style="background: var(--light-bg); padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+                                <div style="font-size: 4rem; margin-bottom: 1rem;">🌀</div>
+                                <h4 style="color: var(--primary-purple);">Motif Batik</h4>
+                            </div>
+                            
+                            <div class="game-board">
+                                <div class="game-card" onclick="checkGameAnswer('parang', 'tebak-batik')">
+                                    <h4>Parang</h4>
+                                </div>
+                                <div class="game-card" onclick="checkGameAnswer('kawung', 'tebak-batik')">
+                                    <h4>Kawung</h4>
+                                </div>
+                                <div class="game-card" onclick="checkGameAnswer('megamendung', 'tebak-batik')">
+                                    <h4>Megamendung</h4>
+                                </div>
+                                <div class="game-card" onclick="checkGameAnswer('truntum', 'tebak-batik')">
+                                    <h4>Truntum</h4>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'alat-musik':
+                    gameTitle = 'Pasangkan Alat Musik';
+                    gameContent = `
+                        <div class="game-container">
+                            <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">${gameTitle}</h3>
+                            <p style="margin-bottom: 2rem;">Pasangkan alat musik dengan daerah asalnya!</p>
+                            
+                            <div class="game-board">
+                                <div class="game-card" onclick="checkGameAnswer('gamelan', 'alat-musik')">
+                                    <div style="font-size: 2rem;">🥁</div>
+                                    <h4>Gamelan</h4>
+                                    <p style="font-size: 0.8rem; color: #666;">Jawa</p>
+                                </div>
+                                <div class="game-card" onclick="checkGameAnswer('sasando', 'alat-musik')">
+                                    <div style="font-size: 2rem;">🎵</div>
+                                    <h4>Sasando</h4>
+                                    <p style="font-size: 0.8rem; color: #666;">NTT</p>
+                                </div>
+                                <div class="game-card" onclick="checkGameAnswer('angklung', 'alat-musik')">
+                                    <div style="font-size: 2rem;">🎋</div>
+                                    <h4>Angklung</h4>
+                                    <p style="font-size: 0.8rem; color: #666;">Jawa Barat</p>
+                                </div>
+                                <div class="game-card" onclick="checkGameAnswer('tifa', 'alat-musik')">
+                                    <div style="font-size: 2rem;">🎪</div>
+                                    <h4>Tifa</h4>
+                                    <p style="font-size: 0.8rem; color: #666;">Papua</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'tebak-tarian':
+                    gameTitle = 'Tebak Tarian';
+                    gameContent = `
+                        <div class="game-container">
+                            <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">${gameTitle}</h3>
+                            <p style="margin-bottom: 2rem;">Tebak nama tarian tradisional!</p>
+                            
+                            <div style="background: var(--light-bg); padding: 2rem; border-radius: 15px; margin-bottom: 2rem;">
+                                <div style="font-size: 4rem; margin-bottom: 1rem;">💃</div>
+                                <p>Tarian dari Bali dengan gerakan dinamis</p>
+                            </div>
+                            
+                            <div class="game-board">
+                                <div class="game-card" onclick="checkGameAnswer('kecak', 'tebak-tarian')">
+                                    <h4>Tari Kecak</h4>
+                                </div>
+                                <div class="game-card" onclick="checkGameAnswer('pendet', 'tebak-tarian')">
+                                    <h4>Tari Pendet</h4>
+                                </div>
+                                <div class="game-card" onclick="checkGameAnswer('legong', 'tebak-tarian')">
+                                    <h4>Tari Legong</h4>
+                                </div>
+                                <div class="game-card" onclick="checkGameAnswer('barong', 'tebak-tarian')">
+                                    <h4>Tari Barong</h4>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            showModal(gameTitle, gameContent);
+        }
+
+        function checkGameAnswer(answer, gameType) {
+            const correctAnswers = {
+                'tebak-batik': 'parang',
+                'alat-musik': 'gamelan',
+                'tebak-tarian': 'kecak'
+            };
+            
+            if (answer === correctAnswers[gameType]) {
+                showToast('Jawaban benar! +10 XP 🎉', 'success');
+                userData.progress.totalXP += 10;
+                updateUserProgress();
+                setTimeout(() => closeModal(), 1500);
+            } else {
+                showToast('Coba lagi! 💪', 'error');
+            }
+        }
+
+        function showLearningCommunity() {
+            showModal('Komunitas Belajar', `
+                <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Bergabung dengan Komunitas</h3>
+                <p style="margin-bottom: 1.5rem;">Terhubung dengan pencinta budaya lainnya:</p>
+                
+                <div style="display: grid; gap: 1.5rem;">
+                    <div class="hub-card" style="padding: 1.5rem;">
+                        <h4 style="color: var(--primary-purple); margin-bottom: 1rem;">👥 Grup Diskusi</h4>
+                        <p>Bergabung dengan grup diskusi berdasarkan minat budaya tertentu</p>
+                        <button class="action-btn btn-outline" style="margin-top: 1rem; width: 100%;" onclick="showDiscussionGroups()">
+                            <i class="fas fa-comments"></i> Lihat Grup
+                        </button>
+                    </div>
+                    
+                    <div class="hub-card" style="padding: 1.5rem;">
+                        <h4 style="color: var(--primary-purple); margin-bottom: 1rem;">📅 Event Budaya</h4>
+                        <p>Ikuti event dan workshop budaya secara online dan offline</p>
+                        <button class="action-btn btn-outline" style="margin-top: 1rem; width: 100%;" onclick="showEvents()">
+                            <i class="fas fa-calendar-alt"></i> Lihat Jadwal
+                        </button>
+                    </div>
+                    
+                    <div class="hub-card" style="padding: 1.5rem;">
+                        <h4 style="color: var(--primary-purple); margin-bottom: 1rem;">🤝 Proyek Kolaborasi</h4>
+                        <p>Ikuti proyek kolaborasi dokumentasi dan pelestarian budaya</p>
+                        <button class="action-btn btn-outline" style="margin-top: 1rem; width: 100%;" onclick="showProjects()">
+                            <i class="fas fa-hands-helping"></i> Jelajahi Proyek
+                        </button>
+                    </div>
+                </div>
+            `);
+        }
+
+        function showDiscussionGroups() {
+            showModal('Grup Diskusi', `
+                <div style="text-align: center;">
+                    <div style="font-size: 4rem;">👥</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Grup Diskusi Budaya</h3>
+                    <p style="margin-bottom: 2rem;">Bergabung dengan grup diskusi berdasarkan minat:</p>
+                    
+                    <div style="display: grid; gap: 1rem;">
+                        <div class="hub-card" style="padding: 1.5rem; text-align: left; cursor: pointer;" onclick="showToast('Bergabung dengan Grup Batik 🎨', 'success')">
+                            <h4 style="color: var(--primary-purple);">🎨 Grup Batik Nusantara</h4>
+                            <p style="color: #666; margin: 0.5rem 0;">Diskusi tentang motif dan teknik batik</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--accent-teal);">1.2k anggota</span>
+                                <button class="action-btn" style="padding: 0.5rem 1rem;">Gabung</button>
+                            </div>
+                        </div>
+                        
+                        <div class="hub-card" style="padding: 1.5rem; text-align: left; cursor: pointer;" onclick="showToast('Bergabung dengan Grup Wayang 🎭', 'success')">
+                            <h4 style="color: var(--primary-purple);">🎭 Komunitas Wayang</h4>
+                            <p style="color: #666; margin: 0.5rem 0;">Diskusi seni pertunjukan wayang</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--accent-teal);">850 anggota</span>
+                                <button class="action-btn" style="padding: 0.5rem 1rem;">Gabung</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+        }
+
+        function showEvents() {
+            showModal('Event Budaya', `
+                <div style="text-align: center;">
+                    <div style="font-size: 4rem;">📅</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Event Budaya Mendatang</h3>
+                    
+                    <div style="display: grid; gap: 1rem; margin-top: 2rem;">
+                        <div class="hub-card" style="padding: 1.5rem; text-align: left;">
+                            <h4 style="color: var(--primary-purple);">Workshop Membatik Dasar</h4>
+                            <p style="color: #666; margin: 0.5rem 0;">📅 15 Desember 2025</p>
+                            <p style="color: #666;">📍 Online via Zoom</p>
+                            <button class="action-btn" style="margin-top: 1rem; width: 100%;" onclick="showToast('Berhasil mendaftar workshop! 🎉', 'success')">
+                                Daftar Sekarang
+                            </button>
+                        </div>
+                        
+                        <div class="hub-card" style="padding: 1.5rem; text-align: left;">
+                            <h4 style="color: var(--primary-purple);">Seminar Pelestarian Wayang</h4>
+                            <p style="color: #666; margin: 0.5rem 0;">📅 20 Desember 2025</p>
+                            <p style="color: #666;">📍 Jakarta Convention Center</p>
+                            <button class="action-btn" style="margin-top: 1rem; width: 100%;" onclick="showToast('Berhasil mendaftar seminar! 🎉', 'success')">
+                                Daftar Sekarang
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `);
+        }
+
+        function showProjects() {
+            showModal('Proyek Kolaborasi', `
+                <div style="text-align: center;">
+                    <div style="font-size: 4rem;">🤝</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Proyek Kolaborasi</h3>
+                    <p style="margin-bottom: 2rem;">Ikuti proyek dokumentasi budaya:</p>
+                    
+                    <div style="display: grid; gap: 1rem;">
+                        <div class="hub-card" style="padding: 1.5rem; text-align: left; cursor: pointer;" onclick="showToast('Bergabung dengan Proyek Dokumentasi Batik 📸', 'success')">
+                            <h4 style="color: var(--primary-purple);">📸 Dokumentasi Motif Batik</h4>
+                            <p style="color: #666; margin: 0.5rem 0;">Dokumentasi digital motif batik tradisional</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--accent-teal);">45 peserta</span>
+                                <button class="action-btn" style="padding: 0.5rem 1rem;">Gabung</button>
+                            </div>
+                        </div>
+                        
+                        <div class="hub-card" style="padding: 1.5rem; text-align: left; cursor: pointer;" onclick="showToast('Bergabung dengan Proyek Arsitektur 🏠', 'success')">
+                            <h4 style="color: var(--primary-purple);">🏠 Inventarisasi Rumah Adat</h4>
+                            <p style="color: #666; margin: 0.5rem 0;">Pendokumentasian arsitektur tradisional</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--accent-teal);">28 peserta</span>
+                                <button class="action-btn" style="padding: 0.5rem 1rem;">Gabung</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+        }
+
+        function showQuickTour() {
+            showModal('Tur Cepat NusaKita', `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 4rem;">🚀</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Selamat Datang di NusaKita!</h3>
+                </div>
+                
+                <div style="display: grid; gap: 1rem;">
+                    <div style="display: flex; align-items: start; gap: 1rem; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="background: var(--primary-purple); color: white; padding: 0.5rem; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">1</div>
+                        <div>
+                            <h4 style="color: var(--primary-purple);">Pilih Topik</h4>
+                            <p>Pilih topik budaya yang ingin Anda pelajari dari beragam pilihan</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: start; gap: 1rem; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="background: var(--primary-purple); color: white; padding: 0.5rem; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">2</div>
+                        <div>
+                            <h4 style="color: var(--primary-purple);">Belajar Interaktif</h4>
+                            <p>Ikuti pelajaran dengan video, kuis, dan aktivitas menarik</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: start; gap: 1rem; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="background: var(--primary-purple); color: white; padding: 0.5rem; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">3</div>
+                        <div>
+                            <h4 style="color: var(--primary-purple);">Dapatkan XP</h4>
+                            <p>Kumpulkan XP dari setiap pelajaran yang diselesaikan</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: start; gap: 1rem; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="background: var(--primary-purple); color: white; padding: 0.5rem; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">4</div>
+                        <div>
+                            <h4 style="color: var(--primary-purple);">Naik Level</h4>
+                            <p>Naikkan level Anda dengan menyelesaikan lebih banyak topik</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="action-btn" style="width: 100%; margin-top: 2rem; justify-content: center;" onclick="showPage('learn')">
+                    <i class="fas fa-play"></i> Mulai Belajar Sekarang
+                </button>
+            `);
+        }
+
+        function showUserProgress() {
+            const progressPercent = (userData.progress.completedLessons / userData.progress.totalLessons) * 100;
+            
+            showModal('Progress Belajar Anda', `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 3rem;">📊</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 0.5rem;">${userData.name}</h3>
+                    <div style="background: var(--accent-yellow); color: white; padding: 0.5rem 1rem; border-radius: 20px; display: inline-block; font-weight: bold;">
+                        Level: ${userData.level}
+                    </div>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${progressPercent}%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>Progress Keseluruhan</span>
+                        <span>${Math.round(progressPercent)}%</span>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0;">
+                    <div style="text-align: center; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="font-size: 1.5rem; color: var(--accent-yellow);">⭐</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;">${userData.progress.totalXP}</div>
+                        <div style="font-size: 0.8rem; color: #666;">Total XP</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="font-size: 1.5rem; color: var(--accent-teal);">🔥</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;">${userData.progress.currentStreak}</div>
+                        <div style="font-size: 0.8rem; color: #666;">Hari Beruntun</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="font-size: 1.5rem; color: var(--accent-orange);">📚</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;">${userData.progress.completedLessons}</div>
+                        <div style="font-size: 0.8rem; color: #666;">Pelajaran</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 1rem; background: var(--light-bg); border-radius: 10px;">
+                        <div style="font-size: 1.5rem; color: var(--secondary-purple);">⏱️</div>
+                        <div style="font-size: 1.5rem; font-weight: bold;">${userData.progress.completedLessons * 15}</div>
+                        <div style="font-size: 0.8rem; color: #666;">Menit Belajar</div>
+                    </div>
+                </div>
+                
+                <button class="action-btn" style="width: 100%; justify-content: center;" onclick="showPage('learn')">
+                    <i class="fas fa-plus"></i> Lanjutkan Belajar
+                </button>
+            `);
+        }
+
+        function showLoginModal() {
+            showModal('Masuk ke NusaKita', `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 4rem;">🔐</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Masuk ke Akun Anda</h3>
+                </div>
+                
+                <div style="display: grid; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="email@contoh.com" id="loginEmail">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" placeholder="Masukkan password" id="loginPassword">
+                    </div>
+                    
+                    <button class="action-btn" style="width: 100%; justify-content: center;" onclick="handleLogin()">
+                        <i class="fas fa-sign-in-alt"></i> Masuk
+                    </button>
+                    
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <span style="color: #666;">Atau</span>
+                    </div>
+                    
+                    <button class="action-btn btn-outline" style="width: 100%; justify-content: center;" onclick="showRegisterModal()">
+                        <i class="fas fa-user-plus"></i> Buat Akun Baru
+                    </button>
+                </div>
+                
+                <p style="text-align: center; margin-top: 2rem; color: #666; font-size: 0.9rem;">
+                    Dengan masuk, Anda menyetujui Syarat & Ketentuan kami
+                </p>
+            `);
+        }
+
+        function showRegisterModal() {
+            showModal('Buat Akun Baru', `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 4rem;">👤</div>
+                    <h3 style="color: var(--primary-purple); margin-bottom: 1rem;">Buat Akun NusaKita</h3>
+                </div>
+                
+                <div style="display: grid; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input type="text" class="form-input" placeholder="Nama lengkap Anda" id="registerName">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="email@contoh.com" id="registerEmail">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" placeholder="Minimal 8 karakter" id="registerPassword">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Konfirmasi Password</label>
+                        <input type="password" class="form-input" placeholder="Ulangi password" id="registerConfirmPassword">
+                    </div>
+                    
+                    <button class="action-btn" style="width: 100%; justify-content: center;" onclick="handleRegister()">
+                        <i class="fas fa-user-plus"></i> Daftar Sekarang
+                    </button>
+                    
+                    <div style="text-align: center; margin: 1rem 0;">
+                        <span style="color: #666;">Sudah punya akun?</span>
+                    </div>
+                    
+                    <button class="action-btn btn-outline" style="width: 100%; justify-content: center;" onclick="showLoginModal()">
+                        <i class="fas fa-sign-in-alt"></i> Masuk
+                    </button>
+                </div>
+            `);
+        }
+
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                showToast('Harap isi semua field!', 'error');
+                return;
+            }
+            
+            // Simulasi login berhasil
+            showToast('Login berhasil! Selamat datang kembali 🎉', 'success');
+            userData.name = email.split('@')[0];
+            updateUserProgress();
+            closeModal();
+        }
+
+        function handleRegister() {
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            if (!name || !email || !password || !confirmPassword) {
+                showToast('Harap isi semua field!', 'error');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showToast('Password tidak cocok!', 'error');
+                return;
+            }
+            
+            if (password.length < 8) {
+                showToast('Password minimal 8 karakter!', 'error');
+                return;
+            }
+            
+            // Simulasi registrasi berhasil
+            showToast('Registrasi berhasil! Silakan login 🎉', 'success');
+            showLoginModal();
+        }
+
+        function updateUserProgress() {
+            document.getElementById('userLevel').innerHTML = `
+                <i class="fas fa-star" style="color: var(--accent-yellow);"></i>
+                <span>${userData.level}</span>
+            `;
+        }
+
+        function showModal(title, content) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = content;
+            document.getElementById('mainModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('mainModal').style.display = 'none';
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            
+            // Set icon based on type
+            let icon = 'ℹ️';
+            if (type === 'error') {
+                icon = '❌';
+                toast.style.background = 'linear-gradient(135deg, #DC143C, #FF6B6B)';
+            } else if (type === 'success') {
+                icon = '✅';
+                toast.style.background = 'linear-gradient(135deg, #228B22, #32CD32)';
+            } else {
+                toast.style.background = 'linear-gradient(135deg, var(--primary-purple), var(--secondary-purple))';
+            }
+            
+            toast.innerHTML = `<span>${icon}</span> ${message}`;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
